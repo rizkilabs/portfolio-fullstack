@@ -5,8 +5,6 @@ import helmet from "helmet";
 import { prisma } from "./lib/prisma.js";
 import projectRoutes from "./routes/projects.js";
 
-app.use("/api/projects", projectRoutes);
-
 const app = express();
 const PORT = Number(process.env.PORT) || 5000;
 
