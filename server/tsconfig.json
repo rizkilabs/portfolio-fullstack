@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "outDir": "dist"
   },
-  "include": ["src", "generated", "prisma.config.ts"]
+  "include": ["src", "generated", "prisma", "prisma.config.ts"]
 }

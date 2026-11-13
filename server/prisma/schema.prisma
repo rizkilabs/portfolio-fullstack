@@ -6,3 +6,17 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  description String
+  thumbnail   String?
+  techStack   String[]
+  githubUrl   String?
+  liveUrl     String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
