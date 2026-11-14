@@ -1,4 +1,5 @@
 import { prisma } from "../src/lib/prisma.js";
+import bcrypt from "bcryptjs";
 
 const projects = [
   {
@@ -36,7 +37,22 @@ const projects = [
   },
 ];
 
+async function seedAdmin() {
+  const { ADMIN_EMAIL, ADMIN_NAME, ADMIN_PASSWORD } = process.env;
+  if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+    throw new Error("ADMIN_EMAIL dan ADMIN_PASSWORD harus diisi di .env");
+  }
+
+  const password = await bcrypt.hash(ADMIN_PASSWORD, 12);
+  await prisma.admin.upsert({
+    where: { email: ADMIN_EMAIL },
+    update: { name: ADMIN_NAME ?? "Admin", password },
+    create: { email: ADMIN_EMAIL, name: ADMIN_NAME ?? "Admin", password },
+  });
+  console.log("Admin seed selesai");
+}
 async function main() {
+  await seedAdmin();
   for (const p of projects) {
     await prisma.project.upsert({
       where: { slug: p.slug },

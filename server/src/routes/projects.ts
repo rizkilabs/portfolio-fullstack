@@ -8,6 +8,7 @@ import {
   updateProjectSchema,
 } from "../schemas/project.js";
 import { slugify } from "../utils/slugify.js";
+import { requireAuth } from "../middleware/auth.js";
 
 const router = Router();
 
@@ -66,46 +67,87 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST /api/projects
-router.post("/", validate(createProjectSchema), async (req, res) => {
-  try {
-    const data = req.body;
-    const project = await prisma.project.create({
-      data: { ...data, slug: data.slug ?? slugify(data.title) },
-    });
-    res.status(201).json({ success: true, data: project });
-  } catch (err) {
-    handleError(err, res);
-  }
-});
+router.post(
+  "/",
+  requireAuth,
+  validate(createProjectSchema),
+  async (req, res) => {
+    try {
+      const data = req.body;
+      const project = await prisma.project.create({
+        data: { ...data, slug: data.slug ?? slugify(data.title) },
+      });
+      res.status(201).json({ success: true, data: project });
+    } catch (err) {
+      handleError(err, res);
+    }
+  },
+);
 
 // PUT /api/projects/:id
-router.put("/:id", validate(updateProjectSchema), async (req, res) => {
-  const id = parseId(req.params.id);
-  if (!id) {
-    return res.status(400).json({ success: false, message: "ID tidak valid" });
-  }
+router.put(
+  "/:id",
+  requireAuth,
+  validate(updateProjectSchema),
+  async (req, res) => {
+    const rawId = req.params.id;
 
-  try {
-    const project = await prisma.project.update({
-      where: { id },
-      data: req.body,
-    });
-    res.json({ success: true, data: project });
-  } catch (err) {
-    handleError(err, res);
-  }
-});
+    if (typeof rawId !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "ID tidak valid",
+      });
+    }
+
+    const id = parseId(rawId);
+
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "ID tidak valid",
+      });
+    }
+
+    try {
+      const project = await prisma.project.update({
+        where: { id },
+        data: req.body,
+      });
+
+      res.json({ success: true, data: project });
+    } catch (err) {
+      handleError(err, res);
+    }
+  },
+);
 
 // DELETE /api/projects/:id
-router.delete("/:id", async (req, res) => {
-  const id = parseId(req.params.id);
+router.delete("/:id", requireAuth, async (req, res) => {
+  const rawId = req.params.id;
+
+  if (typeof rawId !== "string") {
+    return res.status(400).json({
+      success: false,
+      message: "ID tidak valid",
+    });
+  }
+
+  const id = parseId(rawId);
+
   if (!id) {
-    return res.status(400).json({ success: false, message: "ID tidak valid" });
+    return res.status(400).json({
+      success: false,
+      message: "ID tidak valid",
+    });
   }
 
   try {
     await prisma.project.delete({ where: { id } });
-    res.json({ success: true, message: "Project berhasil dihapus" });
+
+    res.json({
+      success: true,
+      message: "Project berhasil dihapus",
+    });
   } catch (err) {
     handleError(err, res);
   }
