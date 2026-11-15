@@ -81,22 +81,43 @@ router.get("/", requireAuth, async (req, res) => {
 
 // GET /api/messages/:id (admin)
 router.get("/:id", requireAuth, async (req, res) => {
-  const id = parseId(req.params.id);
+  const paramId = req.params.id;
+
+  if (typeof paramId !== "string") {
+    return res.status(400).json({
+      success: false,
+      message: "ID tidak valid",
+    });
+  }
+
+  const id = parseId(paramId);
+
   if (!id) {
-    return res.status(400).json({ success: false, message: "ID tidak valid" });
+    return res.status(400).json({
+      success: false,
+      message: "ID tidak valid",
+    });
   }
 
   try {
-    const message = await prisma.message.findUnique({ where: { id } });
+    const message = await prisma.message.findUnique({
+      where: { id },
+    });
+
     if (!message) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Pesan tidak ditemukan" });
+      return res.status(404).json({
+        success: false,
+        message: "Pesan tidak ditemukan",
+      });
     }
+
     res.json({ success: true, data: message });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 });
 
@@ -106,11 +127,22 @@ router.patch(
   requireAuth,
   validate(updateMessageSchema),
   async (req, res) => {
-    const id = parseId(req.params.id);
+    const paramId = req.params.id;
+
+    if (typeof paramId !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "ID tidak valid",
+      });
+    }
+
+    const id = parseId(paramId);
+
     if (!id) {
-      return res
-        .status(400)
-        .json({ success: false, message: "ID tidak valid" });
+      return res.status(400).json({
+        success: false,
+        message: "ID tidak valid",
+      });
     }
 
     try {
@@ -118,43 +150,73 @@ router.patch(
         where: { id },
         data: { isRead: req.body.isRead },
       });
+
       res.json({ success: true, data: message });
     } catch (err) {
       if (
         err instanceof Prisma.PrismaClientKnownRequestError &&
         err.code === "P2025"
       ) {
-        return res
-          .status(404)
-          .json({ success: false, message: "Pesan tidak ditemukan" });
+        return res.status(404).json({
+          success: false,
+          message: "Pesan tidak ditemukan",
+        });
       }
+
       console.error(err);
-      res.status(500).json({ success: false, message: "Server error" });
+
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+      });
     }
   },
 );
 
 // DELETE /api/messages/:id (admin)
 router.delete("/:id", requireAuth, async (req, res) => {
-  const id = parseId(req.params.id);
+  const paramId = req.params.id;
+
+  if (typeof paramId !== "string") {
+    return res.status(400).json({
+      success: false,
+      message: "ID tidak valid",
+    });
+  }
+
+  const id = parseId(paramId);
+
   if (!id) {
-    return res.status(400).json({ success: false, message: "ID tidak valid" });
+    return res.status(400).json({
+      success: false,
+      message: "ID tidak valid",
+    });
   }
 
   try {
     await prisma.message.delete({ where: { id } });
-    res.json({ success: true, message: "Pesan berhasil dihapus" });
+
+    res.json({
+      success: true,
+      message: "Pesan berhasil dihapus",
+    });
   } catch (err) {
     if (
       err instanceof Prisma.PrismaClientKnownRequestError &&
       err.code === "P2025"
     ) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Pesan tidak ditemukan" });
+      return res.status(404).json({
+        success: false,
+        message: "Pesan tidak ditemukan",
+      });
     }
+
     console.error(err);
-    res.status(500).json({ success: false, message: "Server error" });
+
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 });
 
