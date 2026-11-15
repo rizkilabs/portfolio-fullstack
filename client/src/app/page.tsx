@@ -5,6 +5,7 @@ import Skills from "@/components/Skills";
 import Section from "@/components/Section";
 import Projects from "@/components/Projects";
 import ProjectsSkeleton from "@/components/ProjectsSkeleton";
+import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
@@ -19,9 +20,8 @@ export default function Home() {
         </Suspense>
       </Section>
 
-      {/* Placeholder: diisi di tahap 9 */}
       <Section id="contact" title="Contact">
-        <p className="text-gray-500">Segera hadir (tahap 9).</p>
+        <Contact />{" "}
       </Section>
     </main>
   );
