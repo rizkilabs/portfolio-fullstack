@@ -9,6 +9,7 @@ import {
 } from "../schemas/project.js";
 import { slugify } from "../utils/slugify.js";
 import { requireAuth } from "../middleware/auth.js";
+import { parseId } from "../utils/parseId.js";
 
 const router = Router();
 
@@ -27,11 +28,6 @@ function handleError(err: unknown, res: Response) {
   }
   console.error(err);
   return res.status(500).json({ success: false, message: "Server error" });
-}
-
-function parseId(raw: string) {
-  const id = Number(raw);
-  return Number.isInteger(id) && id > 0 ? id : null;
 }
 
 // GET /api/projects
