@@ -1,8 +1,11 @@
+import { connection } from "next/server";
 import { api } from "@/lib/api";
 import type { ApiResponse, Project } from "@/types";
 import ProjectCard from "./ProjectCard";
 
 export default async function Projects() {
+  await connection();
+
   let projects: Project[];
 
   try {
@@ -21,7 +24,6 @@ export default async function Projects() {
     return <p className="text-gray-500">Belum ada project yang ditampilkan.</p>;
   }
 
-  // project unggulan tampil lebih dulu
   const sorted = [...projects].sort(
     (a, b) => Number(b.featured) - Number(a.featured),
   );
