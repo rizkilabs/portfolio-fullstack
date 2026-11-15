@@ -1,7 +1,8 @@
+import { Suspense } from "react";
 import { api } from "@/lib/api";
 import type { ApiResponse, Project } from "@/types";
 
-export default async function Home() {
+async function ProjectsStatus() {
   let projects: Project[] = [];
   let error: string | null = null;
 
@@ -13,17 +14,31 @@ export default async function Home() {
   }
 
   return (
+    <p className="mt-6 rounded-md bg-gray-100 p-3 text-sm">
+      {error
+        ? `API error: ${error}`
+        : `Terhubung ke API: ${projects.length} project ditemukan`}
+    </p>
+  );
+}
+
+export default function Home() {
+  return (
     <main className="mx-auto max-w-5xl px-4">
       <section id="home" className="py-24">
         <h1 className="text-4xl font-bold">Home</h1>
         <p className="mt-4 text-gray-600">Placeholder Homepage (tahap 7).</p>
 
-        {/* Sementara: cek koneksi frontend ke backend. Hapus di tahap 8 */}
-        <p className="mt-6 rounded-md bg-gray-100 p-3 text-sm">
-          {error
-            ? `API error: ${error}`
-            : `Terhubung ke API: ${projects.length} project ditemukan`}
-        </p>
+        {/* Sementara: cek koneksi frontend ke backend */}
+        <Suspense
+          fallback={
+            <p className="mt-6 rounded-md bg-gray-100 p-3 text-sm">
+              Menghubungkan ke API...
+            </p>
+          }
+        >
+          <ProjectsStatus />
+        </Suspense>
       </section>
 
       <section id="about" className="scroll-mt-20 py-24">
