@@ -18,6 +18,19 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="id">
+      <head>
+        <noscript>
+          <style>
+            {`
+              .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+              }
+            `}
+          </style>
+        </noscript>
+      </head>
+
       <body className={`${inter.className} bg-surfacetext-gray-900`}>
         {children}
       </body>
