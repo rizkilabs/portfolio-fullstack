@@ -61,7 +61,7 @@ export default function DashboardClient({
 
   return (
     <div className="min-h-screen bg-gray-50 md:flex">
-      <aside className="border-b border-gray-200 bg-white md:w-60 md:shrink-0 md:border-b-0 md:border-r">
+      <aside className="border-b border-gray-200 bg-surface md:w-60 md:shrink-0 md:border-b-0 md:border-r">
         <div className="px-4 py-4">
           <p className="font-bold">Admin Panel</p>
           <p className="truncate text-xs text-gray-500">{admin.email}</p>
@@ -80,7 +80,7 @@ export default function DashboardClient({
                 href={link.href}
                 className={`whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition ${
                   active
-                    ? "bg-indigo-50 text-indigo-700"
+                    ? "bg-indigo-50 text-indigo-700 dark:text-indigo-300"
                     : "text-gray-600 hover:bg-gray-100"
                 }`}
               >
