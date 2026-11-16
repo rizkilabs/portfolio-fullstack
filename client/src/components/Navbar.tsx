@@ -21,7 +21,7 @@ export default function Navbar() {
         className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4"
       >
         <Link href="/" className="font-bold" onClick={() => setOpen(false)}>
-          Rizki<span className="text-indigo-600">.dev</span>
+          rizki<span className="text-indigo-600">skey</span>
         </Link>
 
         <div className="flex items-center gap-2">
