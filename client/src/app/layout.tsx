@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { siteUrl } from "@/lib/site";
 import ThemeSync from "@/components/ThemeSync";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -62,7 +63,9 @@ export default function RootLayout({
       </head>
 
       <body className={`${inter.className} bg-surfacetext-gray-900`}>
-        <ThemeSync />
+        <Suspense fallback={null}>
+          <ThemeSync />
+        </Suspense>{" "}
         {children}
       </body>
     </html>
