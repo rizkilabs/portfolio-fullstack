@@ -1,16 +1,45 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { siteUrl } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const title = "Mochamad Rizki | Junior Full Stack Developer";
+const description =
+  "Portfolio Mochamad Rizki, Junior Full Stack Developer: profil, skill, pengalaman, dan project dengan React, Next.js, Node.js, dan PostgreSQL.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Mochamad Rizki | Junior Full Stack Developer",
+    default: title,
     template: "%s | Mochamad Rizki",
   },
-  description:
-    "Portfolio Mochamad Rizki, Junior Full Stack Developer: profil, skill, pengalaman, dan project.",
+  description,
+  keywords: [
+    "Junior Full Stack Developer",
+    "Web Developer",
+    "React",
+    "Next.js",
+    "Node.js",
+    "PostgreSQL",
+    "Portfolio",
+  ],
+  authors: [{ name: "Mochamad Rizki" }],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    url: "/",
+    siteName: "Mochamad Rizki",
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
