@@ -128,7 +128,7 @@ export default function MessagesPage() {
 
       {result && result.data.length > 0 && (
         <>
-          <ul className="mt-6 divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white">
+          <ul className="mt-6 divide-y divide-gray-200 rounded-xl border border-gray-200 bg-surface">
             {result.data.map((m) => {
               const open = openId === m.id;
               return (

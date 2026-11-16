@@ -6,7 +6,7 @@ export const profile = {
   photo: "/images/profile.jpg",
   cv: "/cv/CV-Mochamad-Rizki.pdf",
   email: "rizkiskey@gmail.com",
-  github: "https://github.com/USERNAME",
+  github: "https://github.com/rizkilabs",
 };
 
 export const biodata = [

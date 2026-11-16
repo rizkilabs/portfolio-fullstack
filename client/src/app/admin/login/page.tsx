@@ -47,7 +47,7 @@ export default function LoginPage() {
     <main className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm space-y-5 rounded-xl border border-gray-200 bg-white p-8 shadow-sm"
+        className="w-full max-w-sm space-y-5 rounded-xl border border-gray-200 bg-surface p-8 shadow-sm"
       >
         <div>
           <h1 className="text-2xl font-bold">Admin Login</h1>

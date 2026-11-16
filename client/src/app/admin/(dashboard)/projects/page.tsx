@@ -77,7 +77,7 @@ export default function AdminProjectsPage() {
       )}
 
       {projects && projects.length > 0 && (
-        <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-white">
+        <div className="mt-6 overflow-x-auto rounded-xl border border-gray-200 bg-surface">
           <table className="w-full text-left text-sm">
             <thead className="border-b border-gray-200 bg-gray-50 text-xs uppercase text-gray-500">
               <tr>

@@ -31,7 +31,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.techStack.map((tech) => (
             <li
               key={tech}
-              className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700"
+              className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 dark:text-indigo-300"
             >
               {tech}
             </li>
