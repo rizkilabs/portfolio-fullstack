@@ -17,3 +17,25 @@ export interface Project {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Admin {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export interface Message {
+  id: number;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  isRead: boolean;
+  createdAt: string;
+}
+
+export interface PaginatedResponse<T> {
+  success: boolean;
+  data: T[];
+  meta: { page: number; limit: number; total: number; totalPages: number };
+}
