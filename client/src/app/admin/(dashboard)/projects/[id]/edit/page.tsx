@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import ProjectForm from "@/components/admin/ProjectForm";
+import ProjectForm from "@";
 import { api, ApiError } from "@/lib/api";
 import type { ApiResponse, Project } from "@/types";
 
