@@ -9,10 +9,15 @@ import authRoutes from "./routes/auth.js";
 import messageRoutes from "./routes/messages.js";
 
 const app = express();
+app.set("trust proxy", 1);
 const PORT = Number(process.env.PORT) || 5000;
 
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL }));
+const allowedOrigins = (process.env.CLIENT_URL ?? "http://localhost:3000")
+  .split(",")
+  .map((o) => o.trim().replace(/\/$/, ""))
+  .filter(Boolean);   
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.use("/api/projects", projectRoutes);
 app.use("/api/auth", authRoutes);
