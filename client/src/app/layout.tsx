@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { siteUrl } from "@/lib/site";
+import ThemeSync from "@/components/ThemeSync";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -61,6 +62,7 @@ export default function RootLayout({
       </head>
 
       <body className={`${inter.className} bg-surfacetext-gray-900`}>
+        <ThemeSync />
         {children}
       </body>
     </html>
