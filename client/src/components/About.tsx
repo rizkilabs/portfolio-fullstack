@@ -30,9 +30,9 @@ export default function About() {
           <p className="text-sm leading-relaxed text-gray-600">{careerGoal}</p>
         </div>
 
-        {/* Pendidikan */}
+        {/* Education */}
         <div>
-          <h3 className="mb-4 text-lg font-semibold">Pendidikan</h3>
+          <h3 className="mb-4 text-lg font-semibold">Education</h3>
           <ul className="space-y-4">
             {education.map((item) => (
               <li
@@ -47,7 +47,7 @@ export default function About() {
           </ul>
 
           <h3 className="mb-3 mt-8 text-lg font-semibold">
-            Sertifikasi dan Pelatihan
+            Certifications and Training
           </h3>
           <ul className="list-disc space-y-1 pl-5 text-sm text-gray-600">
             {certifications.map((cert) => (
@@ -56,9 +56,9 @@ export default function About() {
           </ul>
         </div>
 
-        {/* Pengalaman */}
+        {/* Work Experience */}
         <div>
-          <h3 className="mb-4 text-lg font-semibold">Pengalaman</h3>
+          <h3 className="mb-4 text-lg font-semibold">Work Experience</h3>
           <ul className="space-y-4">
             {experience.map((item) => (
               <li
