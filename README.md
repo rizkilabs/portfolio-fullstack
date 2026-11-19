@@ -1,9 +1,9 @@
 # Portfolio Full Stack: Mochamad Rizki
 
-Website portfolio pribadi untuk Junior Full Stack Developer, lengkap dengan REST API, database, autentikasi admin, dan dashboard untuk mengelola konten.
+Website portfolio pribadi untuk Full Stack Developer, lengkap dengan REST API, database, autentikasi admin, dan dashboard untuk mengelola konten.
 
-- **Website:** GANTI\_https://nama-project.vercel.app
-- **API (health check):** GANTI\_https://nama-api.onrender.com/api/health
+- **Website:** https://rizkiskey.vercel.app
+- **API (health check):** https://portfolio-fullstack-wmd3.onrender.com/api/health
 
 > Backend di paket gratis bisa "tidur" saat lama tidak ada traffic, jadi request pertama kadang terasa lambat.
 
