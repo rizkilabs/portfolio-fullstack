@@ -2,7 +2,7 @@ export const profile = {
   name: "Rizki",
   title: "Full Stack Developer",
   summary:
-    "A curious mind who turns ideas into digital experiences. A Full Stack Developer passionate about building, experimenting, solving problems, and making things work - sometimes by breaking them first. Always learning, always creating, always evolving.",
+    "A curious mind who turns ideas into digital experiences. A Full Stack Developer passionate about building, experimenting, solving problems, and making things work, sometimes by breaking them first. Always learning, always creating, always evolving.",
   photo: "/images/profile.jpg",
   cv: "/cv/CV-Mochamad-Rizki.pdf",
   email: "rizkiskey@gmail.com",
