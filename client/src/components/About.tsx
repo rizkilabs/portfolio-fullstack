@@ -11,9 +11,9 @@ export default function About() {
   return (
     <Section id="about" title="About Me">
       <div className="grid gap-12 md:grid-cols-2">
-        {/* Biodata */}
+        {/* Personal Information */}
         <div>
-          <h3 className="mb-4 text-lg font-semibold">Biodata</h3>
+          <h3 className="mb-4 text-lg font-semibold">Personal Information</h3>
           <dl className="space-y-2 text-sm">
             {biodata.map((item) => (
               <div key={item.label} className="flex gap-4">
