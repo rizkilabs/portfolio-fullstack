@@ -1,8 +1,8 @@
 export const profile = {
-  name: "Mochamad Rizki",
+  name: "Rizki",
   title: "Full Stack Developer",
   summary:
-    "Junior Full Stack Developer yang membangun aplikasi web dengan React, Next.js, Node.js, dan PostgreSQL. Berpengalaman sebagai Backend Developer Intern dan IT Back Office Developer (Full Stack) di Cinema XXI, serta bersertifikasi BNSP Junior Web Programmer.",
+    "A curious mind who turns ideas into digital experiences. A Full Stack Developer passionate about building, experimenting, solving problems, and making things work - sometimes by breaking them first. Always learning, always creating, always evolving.",
   photo: "/images/profile.jpg",
   cv: "/cv/CV-Mochamad-Rizki.pdf",
   email: "rizkiskey@gmail.com",

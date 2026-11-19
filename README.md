@@ -1,6 +1,6 @@
-# Portfolio Full Stack: Mochamad Rizki
+# Portfolio Full Stack: M. Rizki
 
-Website portfolio pribadi untuk Junior Full Stack Developer, lengkap dengan REST API, database, autentikasi admin, dan dashboard untuk mengelola konten.
+Website portfolio pribadi untuk Full Stack Developer, lengkap dengan REST API, database, autentikasi admin, dan dashboard untuk mengelola konten.
 
 - **Website:** GANTI\_https://nama-project.vercel.app
 - **API (health check):** GANTI\_https://nama-api.onrender.com/api/health
@@ -177,7 +177,7 @@ Project dikerjakan bertahap: satu branch per fitur (`feature/...`), lalu Pull Re
 
 ## Penulis
 
-**Mochamad Rizki**, Junior Full Stack Developer
+**M. **, Full Stack Developer
 
 - Portfolio: https://www.rizkiskey.vercel.app
 - Email: rizkiskey@gmail.com
