@@ -7,7 +7,7 @@ export const profile = {
   cv: "/cv/CV-Mochamad-Rizki.pdf",
   email: "rizkiskey@gmail.com",
   github: "https://github.com/rizkilabs",
-  linkedin: "https://www.linkedin.com/in/rizkiskey/",
+  linkedin: "https://linkedin.com/in/rizkiskey",
 };
 
 export const biodata = [

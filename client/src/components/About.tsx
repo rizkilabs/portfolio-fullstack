@@ -13,7 +13,7 @@ export default function About() {
       <div className="grid gap-12 md:grid-cols-2">
         {/* Biodata */}
         <div>
-          <h3 className="mb-4 text-lg font-semibold">Personal Information</h3>
+          <h3 className="mb-4 text-lg font-semibold">Biodata</h3>
           <dl className="space-y-2 text-sm">
             {biodata.map((item) => (
               <div key={item.label} className="flex gap-4">
@@ -30,9 +30,9 @@ export default function About() {
           <p className="text-sm leading-relaxed text-gray-600">{careerGoal}</p>
         </div>
 
-        {/* Education */}
+        {/* Pendidikan */}
         <div>
-          <h3 className="mb-4 text-lg font-semibold">Education</h3>
+          <h3 className="mb-4 text-lg font-semibold">Pendidikan</h3>
           <ul className="space-y-4">
             {education.map((item) => (
               <li
@@ -47,7 +47,7 @@ export default function About() {
           </ul>
 
           <h3 className="mb-3 mt-8 text-lg font-semibold">
-            Certifications and Training
+            Sertifikasi dan Pelatihan
           </h3>
           <ul className="list-disc space-y-1 pl-5 text-sm text-gray-600">
             {certifications.map((cert) => (
@@ -56,9 +56,9 @@ export default function About() {
           </ul>
         </div>
 
-        {/* Work Experience */}
+        {/* Pengalaman */}
         <div>
-          <h3 className="mb-4 text-lg font-semibold">Work Experience</h3>
+          <h3 className="mb-4 text-lg font-semibold">Pengalaman</h3>
           <ul className="space-y-4">
             {experience.map((item) => (
               <li
