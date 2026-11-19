@@ -15,7 +15,7 @@ export default async function Projects() {
     console.error("Gagal memuat project:", err);
     return (
       <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
-        Project belum bisa dimuat saat ini. Silakan coba lagi nanti.
+        The project couldn't be loaded at this time. Please try again later.
       </p>
     );
   }

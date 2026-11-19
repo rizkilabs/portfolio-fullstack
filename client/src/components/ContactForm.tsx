@@ -136,7 +136,7 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="name" className="text-sm font-medium">
-          Nama
+          Name
         </label>
         <input
           id="name"
@@ -207,7 +207,7 @@ export default function ContactForm() {
 
       <div>
         <label htmlFor="message" className="text-sm font-medium">
-          Pesan
+          Message
         </label>
         <textarea
           id="message"
@@ -254,7 +254,7 @@ export default function ContactForm() {
         disabled={submitting}
         className="w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {submitting ? "Mengirim..." : "Kirim Pesan"}
+        {submitting ? "Mengirim..." : "Send a Message"}
       </button>
     </form>
   );
