@@ -7,19 +7,19 @@ import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const title = "Mochamad Rizki | Junior Full Stack Developer";
+const title = "M. Rizki | Full Stack Developer";
 const description =
-  "Portfolio Mochamad Rizki, Junior Full Stack Developer: profil, skill, pengalaman, dan project dengan React, Next.js, Node.js, dan PostgreSQL.";
+  "Portfolio M. Rizki, Full Stack Developer: profil, skill, pengalaman, dan project dengan React, Next.js, Node.js, dan PostgreSQL.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: title,
-    template: "%s | Mochamad Rizki",
+    template: "%s | M. Rizki",
   },
   description,
   keywords: [
-    "Junior Full Stack Developer",
+    "Full Stack Developer",
     "Web Developer",
     "React",
     "Next.js",
@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     "PostgreSQL",
     "Portfolio",
   ],
-  authors: [{ name: "Mochamad Rizki" }],
+  authors: [{ name: "M. Rizki" }],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "id_ID",
     url: "/",
-    siteName: "Mochamad Rizki",
+    siteName: "M. Rizki",
     title,
     description,
   },

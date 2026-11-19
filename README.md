@@ -1,4 +1,4 @@
-# Portfolio Full Stack: Mochamad Rizki
+# Portfolio Full Stack: M. Rizki
 
 Website portfolio pribadi untuk Full Stack Developer, lengkap dengan REST API, database, autentikasi admin, dan dashboard untuk mengelola konten.
 
@@ -177,7 +177,7 @@ Project dikerjakan bertahap: satu branch per fitur (`feature/...`), lalu Pull Re
 
 ## Penulis
 
-**Mochamad Rizki**, Junior Full Stack Developer
+**M. **, Full Stack Developer
 
 - Portfolio: https://www.rizkiskey.vercel.app
 - Email: rizkiskey@gmail.com
