@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { adminApi } from "@/lib/adminApi";
 import { ApiError } from "@/lib/api";
-import type { Project } from "@/types";
+import type { ApiResponse, Project } from "@/types";
+import Image from "next/image";
 
 type Errors = Record<string, string>;
 
@@ -55,6 +56,49 @@ export default function ProjectForm({ project }: { project?: Project }) {
   const [errors, setErrors] = useState<Errors>({});
   const [serverError, setServerError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+
+  const [uploading, setUploading] = useState(false);
+
+  async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // supaya file yang sama bisa dipilih ulang
+    if (!file) return;
+
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      setErrors((prev) => ({
+        ...prev,
+        thumbnail: "Format harus JPG, PNG, atau WebP",
+      }));
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      setErrors((prev) => ({
+        ...prev,
+        thumbnail: "Ukuran gambar maksimal 2 MB",
+      }));
+      return;
+    }
+
+    const form = new FormData();
+    form.append("file", file);
+
+    setUploading(true);
+    try {
+      const res = await adminApi<ApiResponse<{ url: string }>>("/api/uploads", {
+        method: "POST",
+        body: form,
+      });
+      setValues((prev) => ({ ...prev, thumbnail: res.data.url }));
+      setErrors((prev) => ({ ...prev, thumbnail: "" }));
+    } catch (err) {
+      setErrors((prev) => ({
+        ...prev,
+        thumbnail: err instanceof Error ? err.message : "Upload gagal",
+      }));
+    } finally {
+      setUploading(false);
+    }
+  }
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -188,17 +232,49 @@ export default function ProjectForm({ project }: { project?: Project }) {
 
       <Field
         id="thumbnail"
-        label="URL Thumbnail (opsional)"
+        label="Thumbnail (opsional)"
         error={errors.thumbnail}
-        hint="Link gambar yang bisa dibuka publik. Upload gambar bisa jadi tantangan tambahan nanti."
+        hint="Upload gambar (JPG, PNG, WebP, maksimal 2 MB) atau tempel link gambar."
       >
+        <input
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          onChange={handleFile}
+          disabled={saving || uploading}
+          className="mt-1 block w-full text-sm file:mr-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-medium file:text-indigo-700 hover:file:bg-indigo-100 disabled:opacity-60"
+        />
+        {uploading && (
+          <p className="mt-1 text-xs text-gray-500">Mengunggah...</p>
+        )}
+
+        {values.thumbnail && (
+          <div className="mt-3 flex items-start gap-3">
+            <Image
+              src={values.thumbnail}
+              alt="Pratinjau thumbnail"
+              width={240}
+              height={160}
+              unoptimized
+              className="h-32 w-auto rounded-lg border border-gray-200 object-cover"
+            />
+            <button
+              type="button"
+              onClick={() => setValues((prev) => ({ ...prev, thumbnail: "" }))}
+              className="text-xs text-red-600 hover:underline"
+            >
+              Hapus gambar
+            </button>
+          </div>
+        )}
+
         <input
           id="thumbnail"
           name="thumbnail"
           type="url"
+          placeholder="atau tempel URL gambar"
           value={values.thumbnail}
           onChange={handleChange}
-          disabled={saving}
+          disabled={saving || uploading}
           className={inputClass}
         />
       </Field>
@@ -214,7 +290,7 @@ export default function ProjectForm({ project }: { project?: Project }) {
           type="url"
           value={values.githubUrl}
           onChange={handleChange}
-          disabled={saving}
+          disabled={saving || uploading}
           className={inputClass}
         />
       </Field>
