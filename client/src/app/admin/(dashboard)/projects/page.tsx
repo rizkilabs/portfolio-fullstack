@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { adminApi } from "@/lib/adminApi";
 import type { ApiResponse, Project } from "@/types";
+import { CATEGORY_LABEL } from "@/lib/projects";
 
 export default function AdminProjectsPage() {
   const [projects, setProjects] = useState<Project[] | null>(null);
@@ -82,6 +83,7 @@ export default function AdminProjectsPage() {
             <thead className="border-b border-gray-200 bg-gray-50 text-xs uppercase text-gray-500">
               <tr>
                 <th className="px-4 py-3">Judul</th>
+                <th className="px-4 py-3">Kategori</th>
                 <th className="px-4 py-3">Teknologi</th>
                 <th className="px-4 py-3">Unggulan</th>
                 <th className="px-4 py-3 text-right">Aksi</th>
@@ -91,6 +93,9 @@ export default function AdminProjectsPage() {
               {projects.map((p) => (
                 <tr key={p.id}>
                   <td className="px-4 py-3 font-medium">{p.title}</td>
+                  <td className="px-4 py-3 text-gray-600">
+                    {CATEGORY_LABEL[p.category]}
+                  </td>
                   <td className="px-4 py-3 text-gray-600">
                     {p.techStack.join(", ")}
                   </td>

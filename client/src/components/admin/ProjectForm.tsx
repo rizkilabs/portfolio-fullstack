@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { adminApi } from "@/lib/adminApi";
 import { ApiError } from "@/lib/api";
-import type { ApiResponse, Project } from "@/types";
+import type { ApiResponse, Project, ProjectCategory } from "@/types";
+import { CATEGORY_LABEL } from "@/lib/projects";
 import Image from "next/image";
 
 type Errors = Record<string, string>;
@@ -52,6 +53,7 @@ export default function ProjectForm({ project }: { project?: Project }) {
     githubUrl: project?.githubUrl ?? "",
     liveUrl: project?.liveUrl ?? "",
     featured: project?.featured ?? false,
+    category: project?.category ?? ("FULLSTACK" as ProjectCategory),
   });
   const [errors, setErrors] = useState<Errors>({});
   const [serverError, setServerError] = useState<string | null>(null);
@@ -134,6 +136,7 @@ export default function ProjectForm({ project }: { project?: Project }) {
       githubUrl: values.githubUrl.trim() || null,
       liveUrl: values.liveUrl.trim() || null,
       featured: values.featured,
+      category: values.category
       // slug kosong dikirim sebagai "tidak ada": otomatis dibuat dari judul (tambah)
       // atau tetap memakai slug lama (edit)
       ...(values.slug.trim() ? { slug: values.slug.trim() } : {}),
@@ -213,6 +216,27 @@ export default function ProjectForm({ project }: { project?: Project }) {
           className={inputClass}
         />
       </Field>
+
+      <Field id="category" label="Kategori" error={errors.category}>
+  <select
+    id="category"
+    value={values.category}
+    onChange={(e) =>
+      setValues((prev) => ({
+        ...prev,
+        category: e.target.value as ProjectCategory,
+      }))
+    }
+    disabled={saving}
+    className={inputClass}
+  >
+    {(Object.keys(CATEGORY_LABEL) as ProjectCategory[]).map((key) => (
+      <option key={key} value={key}>
+        {CATEGORY_LABEL[key]}
+      </option>
+    ))}
+  </select>
+</Field>
 
       <Field
         id="techStack"
