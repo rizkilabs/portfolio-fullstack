@@ -1,3 +1,5 @@
+export type ProjectCategory = "FRONTEND" | "BACKEND" | "DATABASE" | "FULLSTACK";
+
 export interface ApiResponse<T> {
   success: boolean;
   data: T;
@@ -14,6 +16,7 @@ export interface Project {
   githubUrl: string | null;
   liveUrl: string | null;
   featured: boolean;
+  category: ProjectCategory;
   createdAt: string;
   updatedAt: string;
 }

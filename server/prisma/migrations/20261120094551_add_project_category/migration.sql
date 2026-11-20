@@ -1,0 +1,2 @@
+-- CreateEnum
+CREATE TYPE "ProjectCategory" AS ENUM ('FRONTEND', 'BACKEND', 'DATABASE', 'FULLSTACK');
