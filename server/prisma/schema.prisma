@@ -7,6 +7,13 @@ datasource db {
   provider = "postgresql"
 }
 
+enum ProjectCategory {
+  FRONTEND
+  BACKEND
+  DATABASE
+  FULLSTACK
+}
+
 model Project {
   id          Int      @id @default(autoincrement())
   title       String
