@@ -19,7 +19,7 @@ model Project {
   title       String
   slug        String          @unique
   description String
-  category    ProjectCategory
+  category    ProjectCategory @default(FULLSTACK)
   thumbnail   String?
   techStack   String[]
   githubUrl   String?
