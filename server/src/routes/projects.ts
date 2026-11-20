@@ -3,9 +3,11 @@ import type { Response } from "express";
 import { prisma } from "../lib/prisma.js";
 import { Prisma } from "../../generated/prisma/client.js";
 import { validate } from "../middleware/validate.js";
+import { z } from "zod";
 import {
   createProjectSchema,
   updateProjectSchema,
+  listProjectsQuerySchema,
 } from "../schemas/project.js";
 import { slugify } from "../utils/slugify.js";
 import { requireAuth } from "../middleware/auth.js";
@@ -31,12 +33,54 @@ function handleError(err: unknown, res: Response) {
 }
 
 // GET /api/projects
-router.get("/", async (_req, res) => {
-  try {
-    const projects = await prisma.project.findMany({
-      orderBy: { createdAt: "desc" },
+// GET /api/projects?category=BACKEND&page=1&limit=6
+router.get("/", async (req, res) => {
+  const parsed = listProjectsQuerySchema.safeParse(req.query);
+  if (!parsed.success) {
+    return res.status(400).json({
+      success: false,
+      message: "Parameter query tidak valid",
+      errors: z.flattenError(parsed.error).fieldErrors,
     });
-    res.json({ success: true, data: projects });
+  }
+
+  const { category, page, limit } = parsed.data;
+  const where: Prisma.ProjectWhereInput = category ? { category } : {};
+  const orderBy = [
+    { featured: "desc" as const },
+    { createdAt: "desc" as const },
+  ];
+
+  try {
+    // tanpa page/limit: perilaku lama, kembalikan semua (dipakai dashboard admin)
+    if (page === undefined && limit === undefined) {
+      const projects = await prisma.project.findMany({ where, orderBy });
+      return res.json({ success: true, data: projects });
+    }
+
+    const currentPage = page ?? 1;
+    const take = limit ?? 6;
+
+    const [total, projects] = await Promise.all([
+      prisma.project.count({ where }),
+      prisma.project.findMany({
+        where,
+        orderBy,
+        skip: (currentPage - 1) * take,
+        take,
+      }),
+    ]);
+
+    res.json({
+      success: true,
+      data: projects,
+      meta: {
+        page: currentPage,
+        limit: take,
+        total,
+        totalPages: Math.ceil(total / take),
+      },
+    });
   } catch (err) {
     handleError(err, res);
   }
