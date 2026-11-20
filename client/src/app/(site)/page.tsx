@@ -20,7 +20,7 @@ const jsonLd = {
   sameAs: [profile.github],
 };
 
-export default async function Home({
+export default function Home({
   searchParams,
 }: {
   searchParams: Promise<{
@@ -28,15 +28,6 @@ export default async function Home({
     page?: string | string[];
   }>;
 }) {
-  const sp = await searchParams;
-
-  const categoryParam = typeof sp.category === "string" ? sp.category : "";
-  const active =
-    CATEGORIES.find((c) => c.slug === categoryParam) ?? CATEGORIES[0];
-
-  const pageParam = typeof sp.page === "string" ? sp.page : "1";
-  const page = Math.max(1, Number.parseInt(pageParam, 10) || 1);
-
   return (
     <main>
       <script
@@ -51,16 +42,42 @@ export default async function Home({
       <Skills />
 
       <Section id="projects" title="Projects">
-        <CategoryTabs active={active.slug} />
-        <Suspense
-          key={`${active.slug}-${page}`}
-          fallback={<ProjectsSkeleton />}
-        >
-          <Projects category={active.slug} page={page} />
+        <Suspense fallback={<div>Memuat kategori...</div>}>
+          <ProjectsContent searchParams={searchParams} />
         </Suspense>
       </Section>
 
       <Contact />
     </main>
+  );
+}
+
+async function ProjectsContent({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    category?: string | string[];
+    page?: string | string[];
+  }>;
+}) {
+  const sp = await searchParams;
+
+  const categoryParam = typeof sp.category === "string" ? sp.category : "";
+
+  const active =
+    CATEGORIES.find((c) => c.slug === categoryParam) ?? CATEGORIES[0];
+
+  const pageParam = typeof sp.page === "string" ? sp.page : "1";
+
+  const page = Math.max(1, Number.parseInt(pageParam, 10) || 1);
+
+  return (
+    <>
+      <CategoryTabs active={active.slug} />
+
+      <Suspense key={`${active.slug}-${page}`} fallback={<ProjectsSkeleton />}>
+        <Projects category={active.slug} page={page} />
+      </Suspense>
+    </>
   );
 }
