@@ -12,6 +12,7 @@ const projects = [
     githubUrl: "https://github.com/USERNAME/todo-list",
     liveUrl: "https://example.com",
     featured: true,
+    category: "FRONTEND" as const,
   },
   {
     title: "Admin Dashboard",
@@ -23,6 +24,7 @@ const projects = [
     githubUrl: "https://github.com/USERNAME/admin-dashboard",
     liveUrl: "https://example.com",
     featured: true,
+    category: "FRONTEND" as const,
   },
   {
     title: "Product Catalog",
@@ -34,6 +36,7 @@ const projects = [
     githubUrl: "https://github.com/USERNAME/product-catalog",
     liveUrl: null,
     featured: false,
+    category: "FRONTEND" as const,
   },
 ];
 
